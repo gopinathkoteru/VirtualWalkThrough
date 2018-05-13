@@ -1,4 +1,3 @@
-test/bower_components/*
 lib/init.js
 lib/transition.js
 lib/hotspot.js
