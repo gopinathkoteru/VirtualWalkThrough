@@ -1,0 +1,21 @@
+{
+  "name": "Housing_Panorama",
+  "version": "1.0.0",
+  "homepage": "https://github.com/saurabh95/Housing_Panorama",
+  "authors": [
+    "Saurabh Kathpalia <sksaurabhkathpalia@gmail.com>"
+  ],
+  "description": "Housing Direct Project",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "1.9.0",
+    "greensock": "1.17.0"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

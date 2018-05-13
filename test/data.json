@@ -1,0 +1,66 @@
+{
+  "0": {
+    "title": "",
+    "path": "panos/1.tiles/%s/l1/%v/l1_%s_%v_%h.jpg",
+    "blur_image_path" : "panos/1.tiles/preview.jpg",
+    "fallback_image": "panos/1.jpg",
+    "side_panel": false,
+    "start_position": 37,
+    "hotspots": [
+      {
+        "to_id": 1,
+        "angle": 104,
+        "error": -92,
+        "text": "pano2"
+      }
+    ],
+    "annotations": [
+      {
+        "lon": 291,
+        "lat": -1,
+        "title": "white board",
+        "desc": "4 X 4"
+      }
+    ]
+  },
+  "1": {
+    "title": "",
+    "path": "panos/2.tiles/%s/l1/%v/l1_%s_%v_%h.jpg",
+    "blur_image_path" : "panos/2.tiles/preview.jpg",
+    "fallback_image": "panos/2.jpg",
+    "side_panel": false,
+    "start_position": 276,
+    "hotspots": [
+      {
+        "to_id": 0,
+        "angle": 210,
+        "error": 84,
+        "text": "pano1"
+      },
+      {
+        "to_id": 2,
+        "angle": 73,
+        "error": 72,
+        "text": "pano2"
+      }
+    ],
+    "annotations": []
+  },
+  "2": {
+    "title": "",
+    "path": "panos/3.tiles/%s/l1/%v/l1_%s_%v_%h.jpg",
+    "blur_image_path" : "panos/3.tiles/preview.jpg",
+    "fallback_image": "panos/3.jpg",
+    "side_panel": false,
+    "start_position": 276,
+    "hotspots": [
+      {
+        "to_id": 1,
+        "angle": 342,
+        "error": -100,
+        "text": "pano2"
+      }
+    ],
+    "annotations": []
+  }
+}

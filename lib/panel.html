@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Housing Panorama</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../test/css/main.css">
+        <style>
+        body{
+            overflow: visible;
+        }
+        #container
+        {
+        	width : 1280px;
+        	height: 500px;
+        }
+        #adjust
+        {
+            width: 400px;
+        }
+        #start-position
+        {
+            width: 400px;
+        }
+        #hotspot-panel {
+            position: absolute;
+            right: 0px;
+            top: 510px;
+        }
+        #annotation-panel{
+            position: absolute;
+            top : 510px;
+            left : 500px;
+        }
+        #save-data-button {
+            position: absolute;
+            top: 600px;
+            left: 600px;
+            width: 100px;
+            height: 100px;
+            color: blue;
+        }
+        #fallback-panel {
+            float: right;
+            position: relative;
+            right: 200px;
+        }
+        </style>
+    </head>
+    <body>
+        <div>
+            <input id = "xml-path" placeholder="XML path"/>
+            <button id ="xml-submit"/>Submit </button>
+        </div>
+        <div id = "container" tabindex = "0"></div>
+        <div>
+            Main Pano :
+            <select id = "list1" >
+            </select>
+            Back Pano :
+            <select id = "list2" >
+            </select> <br/>
+            Opacity :
+            <input type="range" min = "0" max = "1" value = "1" step = "0.1" id= "opacity"/>
+            <div id="display"></div>
+            Error :
+            <input type="range" min="-50" max = "50" value = "0" step ="1" id = "adjust"/>
+            <div id ="error"></div>
+            Start postion : 
+            <input type = "button" id="set-position" value = "Set Position"/>Set current position as Start Position
+        </div>
+        
+        <img id="add-hotspot-image" style="display:none;width:50px;height:50px;" src="../test/images/logo.png">
+        <div id = "annotation-panel">
+            <input id = "add-annotation-button" type = "button" value = "Add Annotation"/>
+            <input id = "fix-annotation-button" type = "button" value = "Fix Annotation"/><br/>
+            <input id="annotation-title" placeholder="Annotation Title"><br>
+            <textarea id="annotation-desc" placeholder="Annotation Description"></textarea><br/>
+            <!--input id = "save-annotation-button" type = "button" value = "Save Annotations"/-->
+
+        </div>
+        <div id="hotspot-panel">
+                <input id="add-hotspot-button" type="button" value="Add Hotspot">
+                <input id="save-hotspot-button" type="button" value="Save Hotspot">
+                <input id="hotspot-title" placeholder="Hotspot Title"><br>
+                <input id="pano-title" placeholder="Title of the Source Pano"><br>
+                <input type="checkbox" id="side-panel">Check if the source pano should be added to side panel
+
+        </div>
+        <div id="fallback-panel">
+            <textarea id="fallback-image" placeholder="Enter the URL of eqiureactangular image for fallback"></textarea><br>
+            <input type="submit" id="fallback-image-button" value="Submit">
+        </div>
+        <input id="save-data-button" type="button" value="Save Data"><br>
+
+
+    	<script src="../test/bower_components/jquery/jquery.min.js"></script>
+    	<script src="./three.min.js"></script> 
+    	<script  src="../lib/housing-pano-panel.js"></script>
+    </body>

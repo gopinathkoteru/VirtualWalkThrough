@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Housing Panorama</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+    </head>
+    <body>
+
+        <div id="container" tabindex="0" style = "display:none">
+            <img id="fullscreen-image" src="images/tour.png" style = "visibility:visible" >
+        </div>
+
+        <script type="text/javascript" src="constants.js"></script>
+
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+        <script src="../lib/three.min.js"></script>    
+
+        <script src="../lib/CanvasRenderer.js"></script>   
+
+        <script src="../lib/Projector.js"></script>        
+
+        <script src="bower_components/GreenSock-JS/src/minified/TweenLite.min.js"></script>
+
+        <script src="../lib/EasePack.js"></script>
+
+        <script type="text/javascript" src="./config.js"></script>
+
+        <script  src="../dist/housing-pano.min.js"></script>
+
+        <script>
+            function detect_webgl()
+            {
+                try
+                {
+                    canvas = $('<canvas/>');
+                    return !!(window.WebGLRenderingContext && (canvas[0].getContext('webgl') || canvas[0].getContext('experimental-webgl')));
+                }
+                catch(e)
+                {
+                    return false;
+                }
+            }
+            function change_pano()
+            {
+                var sel = document.getElementById("pano-list");
+                var value = sel.options[sel.selectedIndex].value;
+                if(value=="pano1")
+                {
+                    DirectPano.hotspots_angle = full_dataset.hotspots_angle;
+                    DirectPano.pano = full_dataset.pano;
+                    DirectPano.annotation_angles = full_dataset.annotation_angles;
+                    //DirectPano.hotspots_angle = [[[1, 70, 110, "Kitchen"], [2, 340, 90, "Hall Entrance"]], [[0, 225, 110, "Main Door"]], [[0, 140, 90, "Main Door"], [3, 0, 90, "Hall Center"]], [[2, 190, 90, "Hall Entrance"], [4, 330, 90, "Hall Window"], [5, 53, 140]], [[3, 135, 90, "Hall Center"], [9, 332, 90]], [[3, 222, 140, "Hall Center"], [6, 315, 55, "Bedroom 1"], [11, 47, 50]], [[5, 120, 55], [7, 210, 50], [8, 295, 130]], [[6, 25, 50, "Bedroom 1"]], [[6, 123, 130, "Bedroom 1"], [9, 220, 90]], [[8, 70, 50], [4, 177, 100, "Hall Window"]], [[11, 340, 45]], [[12, 320, 60], [5, 230, 45], [10, 170, 45, "Bathroom 1"]], [[11, 135, 60], [13, 45, 50, "Bedroom 3"], [18, 313, 53, "Bedroom 2"]], [[12, 245, 50], [14, 130, 75], [16, 63, 100]], [[13, 305, 75, "Bedroom 3"], [15, 145, 50, "Bathroom 3"]], [[14, 305, 50]], [[13, 220, 100, "Bedroom 3"], [17, 75, 50]], [[16, 255, 55]], [[12, 130, 53], [19, 328, 130, "Bathroom 2"], [20, 10, 110]], [[18, 135, 130, "Bedroom 2"]], [[18, 182, 90, "Bedroom 2"], [21, 40, 80]], [[20, 215, 85]]];
+                    //DirectPano.pano = [];
+                    //title = "Some Title";
+                    //for(var i=0;i<22;i++)
+                    //{
+                      //  DirectPano.pano[i] = [title, "./Dataset/panos-house/" + (i + 1) + "/%s/%h_%v.jpg"];
+                        //console.log(DirectPano.pano[i]);
+                    //}
+                }
+                else if(value=="pano2")
+                {
+                    DirectPano.hotspots_angle = [[[1, 19, 47, "Door"]], [[2, 322, 48, "Almirah"], [4, 21, 98, "Curtains"], [0, 213, 43, "Exit"]], [[3, 17, 58, "AC"], [1, 140, 48, "Door"]], [[2, 203, 58, "Almirah"], [4, 95, 45, "AC"]], [[3, 275, 41, "Almirah"], [1, 198, 93, "Door"]]];
+                    var test_pano = [];
+                    var title = "Some Title";
+                    for(var i=0;i<5;i++)
+                    {
+                        test_pano[i] = [title, "./Dataset/panos/" + (i + 1) + "/"];
+                    }
+
+                    DirectPano.pano = test_pano;
+                }
+                else if(value=="pano3")
+                {
+                    DirectPano.hotspots_angle = [[[1, 7, 110, "Corner 2"], [3, 270, 80, "Corner 4"]], [[0, 185, 110, "Corner 1"], [2, 275, 80, "Corner 3"]], [[1, 100, 80, "Corner 2"], [3, 190, 110, "Corner 4"]], [[2, 3, 110, "Corner 3"], [0, 95, 85, "Corner 1"]]];
+                    var test_pano = [];
+                    var title = "Some Title";
+                    for(var i=0;i<5;i++)
+                    {
+                        test_pano[i] = [title, "./Dataset/panos4/" + (i + 1) + "/%s/%h_%v.jpg"];
+                    }
+
+                    DirectPano.pano = test_pano;
+                }
+                remove_pano()
+                show_pano();
+            }
+            function show_pano()
+            {
+                $("#" + "container").show();
+                if(webgl_flag)
+                {
+                    DirectPano.show_pano();
+                }
+                else
+                {
+                    DirectPano.show_fallback_pano();
+                }
+            }
+            function remove_pano()
+            {
+                $("#" + "container").hide();
+                if(webgl_flag)
+                {
+                    DirectPano.remove_pano();
+                }
+                else
+                {
+                    DirectPano.remove_fallback_pano();
+                }
+            }
+            webgl_flag = detect_webgl();
+            if(webgl_flag==false)
+            {
+                var fileref=document.createElement('script')
+                fileref.setAttribute("type","text/javascript")
+                fileref.setAttribute("src", '../lib/housing-pano-fallback.js')
+
+                $.getScript('../lib/housing-pano-fallback.js', function()
+                {
+                    show_pano();
+                });
+            }
+            else
+            {
+                show_pano();
+            }
+            
+        </script>
+
+        <select id = "pano-list" onchange="change_pano()">
+            <option value="pano1">Pano1 </option>
+            <option value="pano2">Pano2 </option>
+            <option value="pano3">Pano3 </option>
+        </select>
+        <button type="button" onclick = "show_pano()">Show Pano</button>
+        <button type="button" onclick = "remove_pano()">Remove Pano</button>
+
+
+    </body>
+</html>
